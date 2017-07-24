@@ -53,5 +53,18 @@ class Menu {
 		else {mealtime = "저녁";}
 		return mealtime;
 	}
+	
+	@Override
+	public String toString() {
+		
+		String messagetext = "오늘의 " + this.caf_name + " " + this.getMealtime() + " 메뉴입니다." 
+				+ "\n======================\n"
+				+ this.rep_menu
+				+ "\n(" + this.banchan + ")"
+				+ "\n" + this.uptime + " / "+ this.price;
+		
+		
+		return messagetext;
+	}
 }
 

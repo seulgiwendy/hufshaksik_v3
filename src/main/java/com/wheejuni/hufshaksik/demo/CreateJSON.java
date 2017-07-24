@@ -8,11 +8,7 @@ public class CreateJSON {
 		JSONObject returnjson = new JSONObject();
 		JSONObject text = new JSONObject();
 		
-		String messagetext = "오늘의 " + originalMenu.getCafName() + " " + originalMenu.getMealtime() + " 메뉴입니다." 
-				+ "\n======================\n"
-				+ originalMenu.getMenu()
-				+ "\n(" + originalMenu.getBanchan() + ")"
-				+ "\n" + originalMenu.getTime() + " / "+ originalMenu.getPrice();
+		String messagetext = originalMenu.toString();
 		
 		
 		returnjson.put("message", messagetext);
