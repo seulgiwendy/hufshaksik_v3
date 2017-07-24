@@ -37,32 +37,46 @@ public static int returnDate() {
 		
 	}
 	
-	public static Menu returnInmunMenu() throws Exception {
-		String date = "170724";//Integer.toString(returnDate());
-		String code = "011";
-		
-		int menucode = Integer.parseInt(date + code);
+	public static Menu[] returnInmunMenu() throws Exception {
+		String date = Integer.toString(returnDate());
+		String [] code = {"010", "011", "012", "013", "014"};
+		Menu [] menuarray = new Menu[5];
+		for (int i = 0; i < code.length; i++) {
+			
+		menuarray [i] = new Menu();
+		int menucode = Integer.parseInt(date + code[i]);
 		int hour = returnHour();
 		JSONObject menujson = returnRawMenus(menucode);
-		Menu inmunMenu = new Menu(); 
+		
 		String uptime = menujson.get("frtime").toString() + " ~ " + menujson.get("totime").toString();
 		String price = menujson.get("price").toString();
 		
-		inmunMenu.setMenu(menujson.get("rep_menu").toString(), menujson.get("menus").toString(), uptime, price, menujson.get("caf_name").toString(), hour );
-		return inmunMenu;
+		menuarray[i].setMenu(menujson.get("rep_menu").toString(), menujson.get("menus").toString(), uptime, price, menujson.get("caf_name").toString(), hour );
+		
+	}
+		return menuarray;
 	}
 	
-	public static Menu returnGyosuMenu() throws Exception {
-		int menucode = 170724009;
-		int hour = returnHour();
+	public static Menu[] returnGyosuMenu() throws Exception {
 		
-		Menu gyosuMenu = new Menu();
+		String date = Integer.toString(returnDate());
+		String [] code = {"008", "009"};
+		Menu [] menuarray = new Menu[2];
+		for (int i = 0; i < code.length; i++) {
+			
+		menuarray [i] = new Menu();
+		int menucode = Integer.parseInt(date + code[i]);
+		int hour = returnHour();
 		JSONObject menujson = returnRawMenus(menucode);
-		 
+		
 		String uptime = menujson.get("frtime").toString() + " ~ " + menujson.get("totime").toString();
 		String price = menujson.get("price").toString();
-		gyosuMenu.setMenu(menujson.get("rep_menu").toString(), menujson.get("menus").toString(), uptime, price, menujson.get("caf_name").toString(), hour);
-		return gyosuMenu;
+		
+		menuarray[i].setMenu(menujson.get("rep_menu").toString(), menujson.get("menus").toString(), uptime, price, menujson.get("caf_name").toString(), hour );
+		
+	}
+		return menuarray;
+		
 	}
 	
 	

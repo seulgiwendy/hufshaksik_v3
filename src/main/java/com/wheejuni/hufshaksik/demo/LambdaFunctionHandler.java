@@ -11,15 +11,23 @@ public class LambdaFunctionHandler implements RequestHandler<JSONObject, JSONObj
 
     @Override
     public JSONObject handleRequest(JSONObject input, Context context) {
-        context.getLogger().log("Input: " + input);
+        JSONObject returnJSON = new JSONObject();
+    	
+    	context.getLogger().log("Input: " + input);
+        
         
         
         String input_type = input.get("content").toString();
-        
+        try {
+			returnJSON = MsgHandler.readMessage(input_type);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         
         // TODO: implement your handler
-        return null;
+        return returnJSON;
     }
 
 }
