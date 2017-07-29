@@ -13,13 +13,28 @@ public class MsgHandler {
 	static int clock() {
 		Calendar cal = Calendar.getInstance();
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
+		int day = cal.get(Calendar.DAY_OF_WEEK);
 		return hour;
+	}
+	
+	static int day() {
+		Calendar cal = Calendar.getInstance();
+		//int hour = cal.get(Calendar.HOUR_OF_DAY);
+		int day = cal.get(Calendar.DAY_OF_WEEK);
+		return day;
 	}
 	
 	public static JSONObject readMessage(String message) throws Exception {
 		int hour = MsgHandler.clock();
 		JSONObject errorMsg = new JSONObject();
 		errorMsg = CreateJSON.returnJSON("메뉴 로드 오류");
+		
+		
+		if (day() == 7 || day() == 1) {
+			
+			JSONObject saturdayerror = CreateJSON.returnJSON("주말에는 서비스가 제공되지 않습니다. \n 다음 업데이트를 기다려주세요!");
+			return MsgHandler.sendMessage(saturdayerror);
+		}
 		
 		if (message.matches("인문관식당")) {
 			Menu [] rawmenu = ParseMenu.returnInmunMenu();
